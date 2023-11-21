@@ -6,9 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 
 public class FileReader {
+    private static final Logger logger = Logger.getLogger(FileReader.class.getName());
 
     public Profile getDataFromFile(File file){
         Profile profile = new Profile();
@@ -20,10 +22,10 @@ public class FileReader {
                 map.put(str[0].strip(), str[1].strip());
             }
         } catch (FileNotFoundException fileNotFoundException) {
-            System.err.println("File not found" + fileNotFoundException);;
+            logger.warning("FileNotFound exception");
         }
         catch (IOException ioException){
-            System.err.println("IO exception" + ioException);
+            logger.warning("IO exception");
         }
         profile.setAge(Integer.parseInt(map.get("Age")));
         profile.setEmail(map.get("Email"));
